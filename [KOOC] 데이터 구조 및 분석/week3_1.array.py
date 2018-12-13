@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Thu Dec 13 19:17:27 2018
-
-@author: Seungmini
-"""
-
 #########1. Insert procedure in array##########
 
 x = ['a', 'b', 'd','e','f']
