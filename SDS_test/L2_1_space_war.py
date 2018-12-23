@@ -27,13 +27,12 @@
 #answer = 42
 #%%input
 #T = int(input())
-#i = 1
+
 NMB = input().split(' ')
 NMB = list(map(int, NMB))
 N = NMB[0]; M = NMB[1]; B = NMB[2] #N = 우주선 개수, M = 미사일 종류의 개수, B = 우주선의 방어막 세기
 
 misile = [None]*M #misile정보
-
 for i in range(M) :
     misile[i] = input().split(' ')
     misile[i] = list(map(int, misile[i]))
