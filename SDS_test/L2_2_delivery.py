@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 2
-7 11 2 7
+7 11 2 7 
 1 5
 
 1 2
@@ -15,7 +15,7 @@
 3 1
 5 7
 
-10 13 3 9
+10 13 3 9 
 4 5 2
 
 9 2
@@ -32,16 +32,45 @@
 8 9
 1 4
 #%%input
-T = int(input())
+#T = int(input())
 NMKS = input().split(' ')
 NMKS = list(map(int, NMKS))
 N = NMKS[0]; M = NMKS[1]; K = NMKS[2]; S = NMKS[3] #N = 마을 수, M = 도로 수, K = 배달해야 하는 마을 개수, S = 시작 마을
-N,M,K,S = raw_input().split()
 
 #배달할 마을 번호
 delivery = input().split(' ')
+#delivery = delivery[:-1]
 delivery = list(map(int, delivery))
+#%%input에서 받아서 바로 dict만들기
+road_dict = {}
+keys = range(1,N+1)
+for key in keys :
+    road_dict[key] = []
 
+for j in range(M) :
+    ab = input().split(' ')
+    ab = list(map(int, ab))
+    road_dict[ab[0]].append(ab[1])
+    road_dict[ab[1]].append(ab[0])
+#%%    
+def BFS_path(graph, start, goal):
+    queue = [(start, [start])]
+
+    while queue:
+        n, path = queue.pop(0)
+        if n == goal:
+            return len(path)-1
+        
+        else:
+            for m in set(graph[n]) - set(path):
+                queue.append((m, path + [m]))
+    
+
+BFS_path(road_dict,7,1)
+
+
+
+#%%뻘짓...
 #road_matrix = [[0] * N]*N #연결 도로 정보 이렇게 하면 생성된 하나의 리스트 한개가 여러개가 생기는 효과. 하나만 바꿔도 바뀜 ㄷㄷ
 
 road_matrix = [[0 for x in range(N)] for y in range(N)]
@@ -57,6 +86,12 @@ road_matrix_t = list(map(list, zip(*road_matrix)))
 road_sum = []
 for road_row in range(N) :
     road_sum.append([first + second for first, second in zip(road_matrix[road_row], road_matrix_t[road_row])])
+#%%
+road_dict = {}
+
+for j in range(N) :
+    road_dict[j+1] = set([i+1 for i in range(N) if road_sum[j][i]==1])
+
 
 #%%symmetric matrix multiplication
 def matrixmulti (A):
