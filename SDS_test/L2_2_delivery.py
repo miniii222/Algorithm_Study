@@ -1,36 +1,14 @@
 # -*- coding: utf-8 -*-
 2
-7 11 2 7 
-1 5
-
+7 7 3 7
+6 4 1
 1 2
-4 5
-6 1
-3 4
-5 3
-3 6
-7 6
-6 2
-7 2
-3 1
-5 7
-
-10 13 3 9 
-4 5 2
-
-9 2
-8 3
-1 10
-8 4
-8 6
-4 6
-6 3
+2 3
+4 1
+4 3
 7 5
-5 9
-9 10
-8 5
-8 9
-1 4
+5 3
+5 6
 #%%input
 #T = int(input())
 NMKS = input().split(' ')
@@ -64,9 +42,31 @@ def BFS_path(graph, start, goal):
         else:
             for m in set(graph[n]) - set(path):
                 queue.append((m, path + [m]))
-    
+#%%
+BFS_path(road_dict, 7,6)
+BFS_path(road_dict, 7,4)
+BFS_path(road_dict, 7,1)
 
-BFS_path(road_dict,7,1)
+BFS_path(road_dict, 6,4)
+BFS_path(road_dict, 6,1)
+#%%
+if K<=2 :
+    answer = BFS_path(road_dict,S,delivery[0])+ sum([BFS_path(road_dict,delivery[i],delivery[i+1]) for i in range(K-1)])+BFS_path(road_dict,delivery[-1],S)
+#%%Dijkstra's algorithm
+delivery = [1,4,6]; path = 0
+now_delivery = S    
+
+while delivery :
+    weight = [BFS_path(road_dict, now_delivery, dd) for dd in delivery]
+    min_weight = min(weight)
+    path += min_weight
+    now_delivery = delivery.pop(weight.index(min_weight))
+    
+answer += BFS_path(road_dict,now_delivery,S)
+#%%
+#시작해서 배달을 마치고 돌아오는 마을과 가장 가까운 마을 두개를 우선 뽑겠다.
+delivery.sort(key = lambda x : BFS_path(road_dict, S, x))
+delivery[1],delivery[-1] = delivery[-1],delivery[1]
 
 
 
