@@ -86,3 +86,39 @@ list1.printStatus()
 
 list1.removeAt(2)
 list1.printStatus()
+
+#%%stack using linked list
+class Stack(object) :
+    lstInstance = SinglyLinkedList()
+    
+    def pop(self) :
+        return self.lstInstance.removeAt(0) #항상 맨 첫번째꺼 제거
+    
+    def push(self, value) :
+        self.lstInstance.insertAt(value, 0) #항상 맨 처음에 추가
+        
+#%%
+stack = Stack()
+
+stack.push("a")
+stack.push("b")
+
+print(stack.pop())
+print(stack.pop())
+
+#%%queu using linked list
+class Queue(object) :
+    lstInstance = SinglyLinkedList()
+    
+    def dequeue(self) :
+        return self.lstInstance.removeAt(0) #항상 맨 첫번째꺼 제거
+    
+    def enqueue(self, value) :
+        self.lstInstance.insertAt(value, self.lstInstance.getSize()) #size를 알아내서 마짐가에 추가
+#%%
+queue = Queue()
+queue.enqueue('a')
+queue.enqueue('b')
+
+print(queue.dequeue())
+print(queue.dequeue())
