@@ -13,6 +13,7 @@ bb = [[x, y] for x, li in enumerate(mylist) for y, val in enumerate(li) if val==
 ```
 - for문 두 개를 한 번 씩 돌면서, 조건을 만족하는 경우 append하는 것보다 여러 개의 list comprehension을 사용하는 게 더 빠르다.
 
+
 ## COPY
 #### 2d-list에서 copy 할 때
 ```
@@ -33,4 +34,15 @@ new = deepcopy(old)
 ##### 2) slice
 ```
 new = [mm[:] for mm in old]
+```
+
+## 생성
+#### 2d-list N x N 생성
+
+```
+[[0] * N] * N
+```
+이렇게 하면 [0][0], [0][1], [0][2]... 다 똑같은 값으로
+```
+[[0] * N for _ in range(N)]
 ```
